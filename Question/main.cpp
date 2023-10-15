@@ -216,15 +216,53 @@ vector<int> twoSum(vector<int>&nums, int target) {
 
 ///Two Sum using Sorting and Two-Pointers technique:
 
-
-void twoSumUsingTwoPointer(int arr[], int target) {
+void swaping(int *x, int *y) {
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+void sorting(int arr[], int size) {
     
+    for(int i = 0; i < size; i++) {
+        
+        for(int j = i + 1; j < size; j++) {
+            if(arr[i] > arr[j]) {
+                swaping(&arr[i], &arr[j]);
+            }
+        }
+    }
+}
+
+/// this two sum is rleated to two pointer concept
+/// - Parameters:
+///   - arr: arr
+///   - target: target
+///   - size: size
+void twoSumUsingTwoPointer(int arr[], int target, int size) {
+  
+    sorting(arr, size);
+    
+    int start = 0;
+    int end = size -1;
+    
+    while (start <= end) {
+        
+        int sum = arr[start] + arr[end];
+        if(sum == target) {
+            printf("%d %d", start, end);
+            break;
+        } else if(sum > target) {
+            end--;
+        } else {
+            start++;
+        }
+    }
 }
 
 
 int main() {
-    int arr[] = {2,7,11,15};
-    int target = 9;
+    int arr[] = {1, 4, 45, 6, 10, -8 };
+    int target = 16;
     int size = sizeof(arr) / sizeof(arr[0]);
-    
+    twoSumUsingTwoPointer(arr, target, size);
 }
