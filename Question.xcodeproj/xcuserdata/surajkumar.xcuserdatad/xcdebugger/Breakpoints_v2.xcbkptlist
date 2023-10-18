@@ -3,4 +3,54 @@
    uuid = "5E16C97D-D95D-454E-9BC7-283FCF30CEBD"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "774ED1CD-E612-4A68-8794-D2A321CD72CB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Question/main.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "309"
+            endingLineNumber = "309"
+            landmarkName = "printPairs(arr, n, sum)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "774ED1CD-E612-4A68-8794-D2A321CD72CB - eed4ffaf5a4c911f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "printPairs(int*, int, int)"
+                  moduleName = "Question"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/surajkumar/Desktop/DSA/Question/Question/main.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "310"
+                  endingLineNumber = "310"
+                  offsetFromSymbolStart = "320">
+               </Location>
+               <Location
+                  uuid = "774ED1CD-E612-4A68-8794-D2A321CD72CB - eed4ffaf5a4c917e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "printPairs(int*, int, int)"
+                  moduleName = "Question"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/surajkumar/Desktop/DSA/Question/Question/main.cpp"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "309"
+                  endingLineNumber = "309"
+                  offsetFromSymbolStart = "280">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
