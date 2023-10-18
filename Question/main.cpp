@@ -309,9 +309,35 @@ vector<int> printPairs(int arr[], int n, int sum) {
     return res;
 }
 
+/*
+ int main() {
+     int arr[] = {1, 4, 45, 6, 10, -8 };
+     int target = 16;
+     int size = sizeof(arr) / sizeof(arr[0]);
+     printPairs(arr, size, target);
+ }
+ */
+
+//9. Palindrome Number
+
+void isPalindrome(int x) {
+    int rev = 0;
+    int y = x;
+    while (x != 0) {
+        int temp = x % 10;
+        rev = rev * 10 + temp;
+        x = x / 10;
+    }
+    
+    if(y == rev) {
+        printf("yes");
+    } else {
+        printf("no");
+    }
+    
+}
+
 int main() {
-    int arr[] = {1, 4, 45, 6, 10, -8 };
-    int target = 16;
-    int size = sizeof(arr) / sizeof(arr[0]);
-    printPairs(arr, size, target);
+    int num = 121;
+    isPalindrome(num);
 }
