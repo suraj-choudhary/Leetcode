@@ -260,9 +260,58 @@ void twoSumUsingTwoPointer(int arr[], int target, int size) {
 }
 
 
+// MARK: Two sum using binary serach:
+
+bool twoSumUsingBinarSearch(int arr[], int low, int high, int key) {
+    
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        if(arr[mid] == key) {
+            return true;
+        }
+        if(arr[mid] < key) {
+            low = mid + 1;
+        } else {
+            high = mid - 1;
+        }
+     }
+    return false;
+}
+
+void checkTwoSum(int arr[], int n, int sum) {
+    sorting(arr, n);
+    
+    for(int i = 0; i < n; i++) {
+        int searchKey = sum - arr[i];
+        if(twoSumUsingBinarSearch(arr, i + 1, n - 1, searchKey)) {
+            printf("%d %d", arr[i], searchKey);
+        }
+    }
+    
+}
+
+// MARK: Two sum using hasing--
+
+#define MAX 50
+
+vector<int> printPairs(int arr[], int n, int sum) {
+    int i, temp;
+    int s[MAX] = { 0 };
+    vector<int>res;
+    for(i = 0; i < n; i++) {
+        temp = sum - arr[i];
+        if(s[temp] == 1) {
+            res.push_back(i);
+            break;
+        }
+        s[arr[i]] = 1;
+    }
+    return res;
+}
+
 int main() {
     int arr[] = {1, 4, 45, 6, 10, -8 };
     int target = 16;
     int size = sizeof(arr) / sizeof(arr[0]);
-    twoSumUsingTwoPointer(arr, target, size);
+    printPairs(arr, size, target);
 }
