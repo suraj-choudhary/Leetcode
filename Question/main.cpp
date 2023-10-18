@@ -188,9 +188,9 @@ void maxReach(int arr[], int size) {
 
 /*
  int main() {
-     int arr[] = {1, 3, 5, 8, 10, 2, 6, 7, 6, 8, 9};
-     int size = sizeof(arr) / sizeof(arr[0]);
-     maxReach(arr, size);
+ int arr[] = {1, 3, 5, 8, 10, 2, 6, 7, 6, 8, 9};
+ int size = sizeof(arr) / sizeof(arr[0]);
+ maxReach(arr, size);
  }
  */
 // MARK: Leetcode easy:
@@ -239,7 +239,7 @@ void sorting(int arr[], int size) {
 ///   - target: target
 ///   - size: size
 void twoSumUsingTwoPointer(int arr[], int target, int size) {
-  
+    
     sorting(arr, size);
     
     int start = 0;
@@ -274,7 +274,7 @@ bool twoSumUsingBinarSearch(int arr[], int low, int high, int key) {
         } else {
             high = mid - 1;
         }
-     }
+    }
     return false;
 }
 
@@ -311,10 +311,10 @@ vector<int> printPairs(int arr[], int n, int sum) {
 
 /*
  int main() {
-     int arr[] = {1, 4, 45, 6, 10, -8 };
-     int target = 16;
-     int size = sizeof(arr) / sizeof(arr[0]);
-     printPairs(arr, size, target);
+ int arr[] = {1, 4, 45, 6, 10, -8 };
+ int target = 16;
+ int size = sizeof(arr) / sizeof(arr[0]);
+ printPairs(arr, size, target);
  }
  */
 
@@ -337,7 +337,60 @@ void isPalindrome(int x) {
     
 }
 
+/*
+ int main() {
+ int num = 121;
+ isPalindrome(num);
+ }
+ */
+
+// MARK: 13. Roman to Integer
+int value(char r) {
+    if(r == 'I') {
+        return 1;
+    }
+    if(r == 'V') {
+        return 5;
+    }
+    if(r == 'X') {
+        return 10;
+    }
+    if(r == 'L') {
+        return 50;
+    }
+    if(r == 'C') {
+        return 100;
+    }
+    if(r == 'D') {
+        return 500;
+    }
+    if(r == 'M') {
+        return 1000;
+    }
+    return -1;
+}
+
+int romanToInt(string s) {
+    int res = 0;
+    for(int i = 0; i < s.length(); i++) {
+        int s1 = value(s[i]);
+        if(i + 1 < s.size()) {
+            int s2  = value(s[i + 1]);
+            if(s1 >= s2) {
+                res += s1;
+            } else {
+                res = res + s2 - s1;
+                i++;
+            }
+        } else {
+            res = res + s1;
+        }
+    }
+    printf("%d ", res);
+    return 0;
+}
+
 int main() {
-    int num = 121;
-    isPalindrome(num);
+    string str = "III";
+    romanToInt(str);
 }
