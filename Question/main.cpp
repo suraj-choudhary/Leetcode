@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <vector>
+#include <stack>
 
 using namespace::std;
 
@@ -389,8 +390,119 @@ int romanToInt(string s) {
     printf("%d ", res);
     return 0;
 }
+/*
+ int main() {
+ string str = "VIII";
+ romanToInt(str);
+ }
+ 
+ */
+
+
+
+
+//MARK: 14. Longest Common Prefix
+
+string commonPrefixUtil(string str1, string str2) {
+    
+    string res = "";
+    long size = str1.size() > str2.size() ? str1.size() : str2.size();
+    for(int i = 0; i < size; i++) {
+        if(str1[i] != str2[i]) {
+            break;
+        }
+        res += str1[i];
+    }
+    return res;
+}
+
+string longestCommonPrefix(vector<string>& strs) {
+    string temp = strs[0];
+    for(int i = 1; i < strs.size(); i++) {
+        temp = commonPrefixUtil(temp, strs[i]);
+    }
+    return temp;
+}
+
+/*
+ int main() {
+ vector<string> str = {"flower", "flow", "flight"};
+ longestCommonPrefix(str);
+ }
+ */
+
+bool isValid(string s) {
+    stack<char> stack;
+    
+    for (int i = 0; i < s.size(); i++) {
+        if (s[i] == '(' || s[i] == '{' || s[i] == '[') {
+            stack.push(s[i]);
+        } else if (s[i] == ')' || s[i] == '}' || s[i] == ']') {
+            if (stack.empty()) {
+                return false;
+            }
+            char openBracket = stack.top();
+            stack.pop();
+            if ((s[i] == ')' && openBracket != '(') ||
+                (s[i] == '}' && openBracket != '{') ||
+                (s[i] == ']' && openBracket != '[')) {
+                return false;
+            }
+        }
+    }
+    return stack.empty();
+}
+
+/*
+ int main() {
+     string str = "()[]{}";
+     isValid(str);
+ }
+
+ */
+
+///21. Merge Two Sorted Lists
+struct Node {
+    int data;
+    struct Node *next;
+};
+
+void DisplayNode(struct Node *p) {
+    while (p != NULL) {
+        printf("%d ", p->data);
+        p = p->next;
+    }
+}
+struct Node* createLinkedList(int arr[], int size) {
+    struct Node *p;
+    struct Node *t;
+    p = (struct Node*)malloc(sizeof(struct Node));
+    p->data = arr[0];
+    p->next = NULL;
+    struct Node *head = p;
+    for(int i = 1; i < size; i++) {
+        t = (struct Node *)malloc(sizeof(struct Node));
+        t->data = arr[i];
+        t->next = NULL;
+        p->next = t;
+        p = t;
+    }
+    return head;
+}
+
+void MergeTwoLinkedList(struct Node *l1, struct Node *l2) {
+    
+}
 
 int main() {
-    string str = "III";
-    romanToInt(str);
+    int arr[] = {1,2,4};
+    int arr2[] = {1,3,4};
+
+    int size2 = sizeof(arr2) / sizeof(arr2[0]);
+    int size = sizeof(arr) / sizeof(arr[0]);
+    struct Node *list1 = createLinkedList(arr, size);
+    printf("\n");
+    struct Node *list2 = createLinkedList(arr2, size2);
+
+    MergeTwoLinkedList(list1, list2);
 }
