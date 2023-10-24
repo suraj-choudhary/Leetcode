@@ -455,10 +455,10 @@ bool isValid(string s) {
 
 /*
  int main() {
-     string str = "()[]{}";
-     isValid(str);
+ string str = "()[]{}";
+ isValid(str);
  }
-
+ 
  */
 
 ///21. Merge Two Sorted Lists
@@ -490,19 +490,144 @@ struct Node* createLinkedList(int arr[], int size) {
     return head;
 }
 
+/// Description
+/// - Parameters: Bruite force
+///   - l1: l1 description
+///   - l2: l2 description
 void MergeTwoLinkedList(struct Node *l1, struct Node *l2) {
+    
+    vector<int>res;
+    
+    while (l1 != NULL) {
+        res.push_back(l1->data);
+        l1 = l1->next;
+    }
+    while (l2 != NULL) {
+        res.push_back(l2->data);
+        l2 = l2->next;
+    }
+    
+    sort(res.begin(), res.end());
+    
+    struct Node *p;
+    struct Node *t;
+    p = (struct Node*)malloc(sizeof(struct Node));
+    p->data = res[0];
+    p->next = NULL;
+    struct Node *head = p;
+    for(int i = 1; i < res.size(); i++) {
+        t = (struct Node *)malloc(sizeof(struct Node));
+        t->data = res[i];
+        t->next = NULL;
+        p->next = t;
+        p = t;
+    }
+    DisplayNode(head);
     
 }
 
-int main() {
-    int arr[] = {1,2,4};
-    int arr2[] = {1,3,4};
+/// MergeTwoLinkedListMethod2
+/// - Parameters:
+///   - list1: list1 description
+///   - list2: list2 description
+void MergeTwoLinkedListMethod2(struct Node *list1, struct Node *list2) {
+    struct Node *third;
+    struct Node *last;
+    
+    if(list1->data < list2->data) {
+        third = last = list1;
+        list1 = list1->next;
+        last->next = NULL;
+        
+    } else {
+        third = last = list2;
+        list2 = list2->next;
+        last->next = NULL;
+    }
+    
+    while (list1 != NULL && list2 != NULL) {
+        if(list1->data < list2->data) {
+            last->next = list1;
+            last = list1;
+            list1 = list1->next;
+            last->next = NULL;
+        } else {
+            last->next = list2;
+            last = list2;
+            list2 = list2->next;
+            last->next = NULL;
+        }
+    }
+    if(list1 != NULL) {
+        last->next = list1;
+        
+    } else {
+        last->next = list2;
+    }
+    DisplayNode(third);
+}
 
+
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
+        struct ListNode *third;
+        struct ListNode *last;
+        
+        if(list1->val < list2->val) {
+            third = last = list1;
+            list1 = list1->next;
+            last->next = NULL;
+            
+        } else {
+            third = last = list2;
+            list2 = list2->next;
+            last->next = NULL;
+        }
+        
+        while (list1 != NULL && list2 != NULL) {
+            if(list1->val < list2->val) {
+                last->next = list1;
+                last = list1;
+                list1 = list1->next;
+                last->next = NULL;
+            } else {
+                last->next = list2;
+                last = list2;
+                list2 = list2->next;
+                last->next = NULL;
+            }
+        }
+        if(list1 != NULL) {
+            last->next = list1;
+            
+        } else {
+            last->next = list2;
+        }
+        return third;
+    }
+};
+
+
+int main() {
+    int arr[] = {5,2,4};
+    int arr2[] = {3,3,4};
+    
     int size2 = sizeof(arr2) / sizeof(arr2[0]);
     int size = sizeof(arr) / sizeof(arr[0]);
     struct Node *list1 = createLinkedList(arr, size);
     printf("\n");
     struct Node *list2 = createLinkedList(arr2, size2);
-
-    MergeTwoLinkedList(list1, list2);
+    
+    MergeTwoLinkedListMethod2(list1, list2);
+    Solution obj;
 }
