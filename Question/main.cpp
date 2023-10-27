@@ -617,17 +617,143 @@ public:
     }
 };
 
+/*
+ int main() {
+ int arr[] = {5,2,4};
+ int arr2[] = {3,3,4};
+ 
+ int size2 = sizeof(arr2) / sizeof(arr2[0]);
+ int size = sizeof(arr) / sizeof(arr[0]);
+ struct Node *list1 = createLinkedList(arr, size);
+ printf("\n");
+ struct Node *list2 = createLinkedList(arr2, size2);
+ 
+ MergeTwoLinkedListMethod2(list1, list2);
+ Solution obj;
+ }
+ 
+ */
+
+// MARK: 26. Remove Duplicates from Sorted Array
+
+int removeDuplicates(vector<int>& nums) {
+    int start = 0;
+    int arr[nums.size()];
+    int j = 0;
+    while (start < nums.size()) {
+        if(nums[start] != nums[start + 1]) {
+            arr[j] = nums[start];
+            j++;
+        }
+        start++;
+    }
+    return 0;
+}
+
+/*
+ int main() {
+ vector<int> arr = {1, 2, 2, 3, 4, 4, 4, 5, 5};
+ removeDuplicates(arr);
+ }
+ */
+// MARK: 26. Remove Duplicates from Sorted Array method 2:
+
+
+int removeDuplicatesMethod2(int arr[], int n) {
+    
+    int temp[n];
+    int j = 0;
+    for(int i = 0; i < n - 1; i++) {
+        if(arr[i] != arr[j + 1]) {
+            temp[j] = arr[i];
+        }
+        j++;
+    }
+    temp[j] = arr[n - 1];
+    for(int i = 0; i < n; i++) {
+        printf("%d ", temp[i]);
+    }
+    return 0;
+}
+
+/*
+ int main() {
+ int arr[] = {1, 2, 2, 3, 4, 4, 4, 5, 5};
+ int size = sizeof(arr) / sizeof(arr[0]);
+ removeDuplicatesMethod2(arr, size);
+ }
+ */
+
+
+int BinarySearch(int arr[], int size, int key) {
+    int start = 0;
+    int end = size - 1;
+    
+    for(int i = 0; i < size; i++) {
+        int mid = (end - start) / 2;
+        if(arr[mid] == key) {
+            return arr[mid];
+        } else if(arr[mid] > key) {
+            end = mid - 1;
+        } else {
+            start = mid + 1;
+        }
+    }
+    return -1;
+}
+
+void removeTheDuplictates(int arr[], int n) {
+    
+    for(int i = 0; i < n; i++) {
+       int value = BinarySearch(arr, n, arr[i]);
+       
+    }
+}
+
+/*
+ int main() {
+     int arr[] = {1, 2, 2, 3, 4, 4, 4, 5, 5};
+     int size = sizeof(arr) / sizeof(arr[0]);
+     removeTheDuplictates(arr, size);
+ }
+
+ */
+
+void display(int arr[], int size) {
+    for(int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+}
+
+void removeElement(int arr[], int size, int key) {
+    int start = 0;
+    for(int i = 0; i < size - 1; i++) {
+        if(arr[i] != key) {
+            arr[start] = arr[i];
+            start++;
+        }
+    }
+    printf("%d ", start);
+    display(arr, size);
+}
+
+
+/*
+ int main() {
+     int arr[] = {3,2,2,3};
+     int size = sizeof(arr) / sizeof(arr[0]);
+     removeElement(arr, size, 3);
+ }
+
+ */
+
+int strStr(string haystack, string needle) {
+    
+    return 0;
+}
 
 int main() {
-    int arr[] = {5,2,4};
-    int arr2[] = {3,3,4};
-    
-    int size2 = sizeof(arr2) / sizeof(arr2[0]);
-    int size = sizeof(arr) / sizeof(arr[0]);
-    struct Node *list1 = createLinkedList(arr, size);
-    printf("\n");
-    struct Node *list2 = createLinkedList(arr2, size2);
-    
-    MergeTwoLinkedListMethod2(list1, list2);
-    Solution obj;
+    string str1 = "sadbutsad";
+    string str2 = "sad";
+    strStr(str1, str2);
 }
