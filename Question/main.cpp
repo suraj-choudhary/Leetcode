@@ -705,18 +705,18 @@ int BinarySearch(int arr[], int size, int key) {
 void removeTheDuplictates(int arr[], int n) {
     
     for(int i = 0; i < n; i++) {
-       int value = BinarySearch(arr, n, arr[i]);
-       
+        int value = BinarySearch(arr, n, arr[i]);
+        
     }
 }
 
 /*
  int main() {
-     int arr[] = {1, 2, 2, 3, 4, 4, 4, 5, 5};
-     int size = sizeof(arr) / sizeof(arr[0]);
-     removeTheDuplictates(arr, size);
+ int arr[] = {1, 2, 2, 3, 4, 4, 4, 5, 5};
+ int size = sizeof(arr) / sizeof(arr[0]);
+ removeTheDuplictates(arr, size);
  }
-
+ 
  */
 
 void display(int arr[], int size) {
@@ -740,20 +740,174 @@ void removeElement(int arr[], int size, int key) {
 
 /*
  int main() {
-     int arr[] = {3,2,2,3};
-     int size = sizeof(arr) / sizeof(arr[0]);
-     removeElement(arr, size, 3);
+ int arr[] = {3,2,2,3};
+ int size = sizeof(arr) / sizeof(arr[0]);
+ removeElement(arr, size, 3);
+ }
+ 
+ */
+
+// MARK: Find the Index of the First Occurrence in a String
+int strStr(string str1, string str2) {
+    
+    long n = str1.length();
+    long m = str2.length();
+    
+    for(int i = 0; i < n; i++) {
+        int temp = i;
+        int j = 0;
+        for(j = 0; j < m; j++) {
+            
+            if(str1[temp] != str2[j]) {
+                break;
+            }
+            temp++;
+        }
+        if(j == m) {
+            printf("%d ", i);
+        }
+    }
+    return 0;
+}
+
+/*
+ int main() {
+     string str1 = "takeyouforward";
+     string str2 = "forward";
+     strStr(str1, str2);
  }
 
  */
 
-int strStr(string haystack, string needle) {
+// MARK: 35. Search Insert Position
+int searchInsert(int arr[], int size, int target) {
+    int i;
     
+    for(i = 0; i < size; i++) {
+        if(arr[i] == target) {
+            return i;
+        } else if(arr[i] > target) {
+            return i;
+        }
+    }
+    return i;
+}
+
+/*
+ int main() {
+     int arr[] = {1,3,5,6};
+     int size = sizeof(arr) /sizeof(arr[0]);
+     int target = 2;
+     searchInsert(arr, size, target);
+ }
+ */
+
+// MARK: 58. Length of Last Word
+
+int lengthOfLastWord(string s) {
+    
+    int start = 0;
+
+    for(int i = 0; i < s.size(); i++) {
+        if(s[i] == ' ') {
+            start = 0;
+            continue;
+        } else {
+            start++;
+        }
+    }
+    printf("%d ", start);
     return 0;
 }
 
+int lengthOfLastWord2(string s) {
+    
+    int start = 0;
+    long end = s.size() - 1;
+    
+    while (end >= 0 && s[end] == ' ') {
+        end--;
+    }
+    while (end >= 0 && s[end] != ' ') {
+        start++;
+        end--;
+    }
+    return 0;
+}
+/*
+ int main() {
+     string str =  "   fly me   to   the moon  ";
+     lengthOfLastWord2(str);
+ }
+ */
+
+
+// MARK: 66. Plus One
+vector<int> plusOne(vector<int>arr, long n1) {
+    long n = n1 - 1;
+    while (n >= 0) {
+        if(arr[n] != 9) {
+            arr[n]++;
+            n--;
+            break;
+        } else {
+            arr[n] = 0;
+            n--;
+        }
+    }
+    return arr;
+}
+
+vector<int> plusOne(vector<int>& digits) {
+    long n = digits.size();
+    for (long i = n - 1; i >= 0; i--) {
+        if (digits[i] != 9) {
+            digits[i]++;
+            return digits;
+        } else {
+            digits[i] = 0;
+        }
+    }
+    
+    digits.insert(digits.begin(), 1);
+    return digits;
+}
+
+/*
+ int main() {
+     vector<int>res = {1, 2, 3};
+     long size = res.size();
+     vector<int>res1 = plusOne(res, size);
+     for(int i = 0; i < res1.size(); i++) {
+         printf("%d ", res1[i]);
+     }
+ }
+
+ */
+string addBinary(string a, string b) {
+    
+    int carry = 0;
+    string res = "";
+    
+    long maxLen = std::max(a.length(), b.length());
+
+    for(int i = 0; i < maxLen; i++) {
+        int f = i < a.length() ? a[a.length() - i - 1] - '0' : 0;
+        int s = i < b.length() ? b[b.length() - i - 1] - '0' : 0;
+
+        int sum = f + s + carry;
+        carry = sum / 2;
+        res = std::to_string(sum % 2) + res;
+
+    }
+    if (carry > 0) {
+        res = "1" + res;
+    }
+    return res;
+}
+
 int main() {
-    string str1 = "sadbutsad";
-    string str2 = "sad";
-    strStr(str1, str2);
+    string a = "11";
+    string b = "1";
+    addBinary(a, b);
 }
