@@ -772,11 +772,11 @@ int strStr(string str1, string str2) {
 
 /*
  int main() {
-     string str1 = "takeyouforward";
-     string str2 = "forward";
-     strStr(str1, str2);
+ string str1 = "takeyouforward";
+ string str2 = "forward";
+ strStr(str1, str2);
  }
-
+ 
  */
 
 // MARK: 35. Search Insert Position
@@ -795,10 +795,10 @@ int searchInsert(int arr[], int size, int target) {
 
 /*
  int main() {
-     int arr[] = {1,3,5,6};
-     int size = sizeof(arr) /sizeof(arr[0]);
-     int target = 2;
-     searchInsert(arr, size, target);
+ int arr[] = {1,3,5,6};
+ int size = sizeof(arr) /sizeof(arr[0]);
+ int target = 2;
+ searchInsert(arr, size, target);
  }
  */
 
@@ -807,7 +807,7 @@ int searchInsert(int arr[], int size, int target) {
 int lengthOfLastWord(string s) {
     
     int start = 0;
-
+    
     for(int i = 0; i < s.size(); i++) {
         if(s[i] == ' ') {
             start = 0;
@@ -836,8 +836,8 @@ int lengthOfLastWord2(string s) {
 }
 /*
  int main() {
-     string str =  "   fly me   to   the moon  ";
-     lengthOfLastWord2(str);
+ string str =  "   fly me   to   the moon  ";
+ lengthOfLastWord2(str);
  }
  */
 
@@ -875,14 +875,14 @@ vector<int> plusOne(vector<int>& digits) {
 
 /*
  int main() {
-     vector<int>res = {1, 2, 3};
-     long size = res.size();
-     vector<int>res1 = plusOne(res, size);
-     for(int i = 0; i < res1.size(); i++) {
-         printf("%d ", res1[i]);
-     }
+ vector<int>res = {1, 2, 3};
+ long size = res.size();
+ vector<int>res1 = plusOne(res, size);
+ for(int i = 0; i < res1.size(); i++) {
+ printf("%d ", res1[i]);
  }
-
+ }
+ 
  */
 string addBinary(string a, string b) {
     
@@ -890,15 +890,15 @@ string addBinary(string a, string b) {
     string res = "";
     
     long maxLen = std::max(a.length(), b.length());
-
+    
     for(int i = 0; i < maxLen; i++) {
         int f = i < a.length() ? a[a.length() - i - 1] - '0' : 0;
         int s = i < b.length() ? b[b.length() - i - 1] - '0' : 0;
-
+        
         int sum = f + s + carry;
         carry = sum / 2;
         res = std::to_string(sum % 2) + res;
-
+        
     }
     if (carry > 0) {
         res = "1" + res;
@@ -906,8 +906,198 @@ string addBinary(string a, string b) {
     return res;
 }
 
-int main() {
-    string a = "11";
-    string b = "1";
-    addBinary(a, b);
+/*
+ int main() {
+ string a = "11";
+ string b = "11";
+ addBinary(a, b);
+ }
+ */
+
+
+/// Description
+/// - Parameter x: x description
+int mySqrt(int x) {
+    int ans = 1;
+    for(int i = 1; i <= x; i++) {
+        if(i * i <= x) {
+            ans = i;
+        } else {
+            break;
+        }
+    }
+    return ans;
 }
+
+/// Description
+/// - Parameter x: x description
+int mySqrtMethod2(int x) {
+    int start = 0;
+    int end = x;
+    int ans = 0;
+    
+    while (start <= end) {
+        int mid = start + (end - start) / 2;
+        if(mid <= x / mid) {
+            ans = mid;
+            start = mid + 1;
+        } else {
+            end = mid - 1;
+        }
+    }
+    return ans;
+}
+
+/*
+ int main() {
+ int x = 16;
+ mySqrtMethod2(x);
+ }
+ 
+ */
+// MARK: 70. Climbing Stairs
+
+int climbStairs(int n) {
+    if (n <= 0) {
+        return 0;
+    } else if (n == 1) {
+        return 1;
+    } else if (n == 2) {
+        return 2;
+    } else {
+        return climbStairs(n - 1) + climbStairs(n - 2);
+    }
+}
+
+/*
+ int main() {
+     int n = 3;
+     int a = climbStairs(n);
+     printf("%d ", a);
+ }
+ */
+
+
+// MARK: 83. Remove Duplicates from Sorted List
+
+
+void deleteDuplicates(Node *head, int size) {
+    
+    struct Node *current = head;
+    struct Node *next;
+    
+    while (current->next != NULL) {
+        if(current->data == current->next->data) {
+            next = current->next->next;
+            free(current->next);
+            current->next = next;
+        } else {
+            current = current->next;
+        }
+    }
+    DisplayNode(head);
+}
+
+/*
+ int main() {
+     int arr[] = {1,1,2};
+     int size = sizeof(arr) / sizeof(arr[0]);
+     struct Node *list = createLinkedList(arr, size);
+     deleteDuplicates(list, size);
+ }
+ */
+///Subarray with given sum
+
+/*
+ N = 5, S = 12
+ A[] = {1,2,3,7,5}
+ Output: 2 4
+ */
+
+void subarraySum(int arr[], int size, int target) {
+   
+    int sum = 0;
+    int start = 0;
+    for(int i = 0; i < size; i++) {
+        while (sum > target && start < i) {
+            sum = sum - arr[start];
+            start++;
+        }
+        if(sum == target) {
+            printf("%d %d", start, i);
+            break;
+        }
+        sum = sum + arr[i];
+    }
+}
+/*
+ int main() {
+     int arr[] = {1,2,3,7,5};
+     int sum = 12;
+     int size = sizeof(arr) / sizeof(arr[0]);
+     subarraySum(arr, size, sum);
+ }
+ 
+ */
+///560. Subarray Sum Equals K
+/*
+ Input: nums = [1,2,3], k = 3
+ Output: 2
+ */
+
+int toatlSubarraySum(int arr[], int size, int k) {
+    int sum = arr[0];
+    int count = 0;
+    for(int i = 1; i < size; i++) {
+        int start = 0;
+        
+        while (sum > k && start < size) {
+            sum = sum - arr[start];
+            start++;
+        }
+        if(sum == k) {
+            count += 1;
+            printf("%d ", count);
+        }
+        sum += arr[i];
+    }
+    return 0;
+}
+
+/*
+ int main() {
+     int arr[] = {1,2,3,7,5};
+     int sum = 12;
+     int size = sizeof(arr) / sizeof(arr[0]);
+     toatlSubarraySum(arr, size, sum);
+ }
+
+ */
+
+// MARK: Merge Sorted Array:
+
+void merge(vector<long>& nums1, long m, vector<long>& nums2, long n) {
+    int i = 0;
+    int j = 0;
+    int k = 0;
+    long arrs[m + n];
+    while (i < m) {
+        arrs[k++] = nums1[i++];
+    }
+    while (j < n) {
+        arrs[k++] = nums2[j++];
+    }
+    
+    for (long l = 0; l < n + m; l++) {
+        printf("%ld ", arrs[l]);
+    }
+}
+
+ int main() {
+     vector<long>arr1 = {1,2,3,0,0,0};
+     long m = arr1.size();
+     vector<long>arr2 = {2,5,6};
+     long n = arr2.size();
+     merge(arr1, m, arr2, n);
+     
+ }
